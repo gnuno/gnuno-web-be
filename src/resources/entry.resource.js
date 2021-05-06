@@ -68,8 +68,24 @@ async function editEntry(req, res) {
   }
 }
 
+async function deleteEntry(req, res) {
+  try {
+    const { id } = req.params;
+
+    const response = await Entry.deleteOne({ _id: id });
+
+    if (!response.n) return res.status(404).end();
+    return res.status(200).end();
+  } catch (err) {
+    return res
+      .status(500)
+      .send({ message: "Something wrong happend while deleteing Entry" });
+  }
+}
+
 module.exports = {
   getEntries,
   createEntry,
   editEntry,
+  deleteEntry,
 };
