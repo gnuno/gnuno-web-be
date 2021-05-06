@@ -5,20 +5,21 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --detectOpenHandles"
   },
   "keywords": [],
-  "author": "",
+  "author": "GNUno",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.7",
-    "validator": "^13.6.0"
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "jsonwebtoken": "8.5.1",
+    "mongoose": "5.12.7",
+    "validator": "13.6.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "@shelf/jest-mongodb": "1.2.4",
+    "jest": "26.6.3",
+    "nodemon": "2.0.7"
   }
 }
