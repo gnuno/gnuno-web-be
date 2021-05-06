@@ -40,7 +40,36 @@ async function createEntry(req, res) {
   }
 }
 
+async function editEntry(req, res) {
+  try {
+    const { title, description, type, image } = req.body;
+    const { id } = req.params;
+
+    const entryFromDB = await Entry.findById(id);
+
+    let updated = {
+      title: title ? title : entryFromDB.title,
+      description: description ? description : entryFromDB.description,
+      type: type ? type : entryFromDB.type,
+      image: image ? image : entryFromDB.image,
+    };
+
+    await Entry.findOneAndUpdate(
+      { _id: id },
+      { $set: updated },
+      { omitUndefined: true }
+    );
+    return res.status(200).end();
+  } catch (err) {
+    console.log(error);
+    return res
+      .status(500)
+      .send({ message: "There was an error during patching" });
+  }
+}
+
 module.exports = {
   getEntries,
   createEntry,
+  editEntry,
 };
