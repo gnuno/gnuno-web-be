@@ -7,13 +7,12 @@ const entryData = {
   description: "Facebook",
   author: "MatiGimenez",
 };
-let connection;
 
 describe("Entry model", () => {
   // It's just so easy to connect to the MongoDB Memory Server
   // By using mongoose.connect
   beforeAll(async () => {
-    connection = await mongoose.connect(
+    await mongoose.connect(
       process.env.MONGO_URL,
       { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
       (err) => {
@@ -25,7 +24,8 @@ describe("Entry model", () => {
     );
   });
   afterAll(async () => {
-    await connection.close();
+    await mongoose.connection.dropDatabase();
+    await mongoose.connection.close();
   });
 
   it("should create & save entry successfully", async () => {
