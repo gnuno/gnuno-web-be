@@ -9,8 +9,6 @@ const entryData = {
 };
 
 describe("Entry model", () => {
-  // It's just so easy to connect to the MongoDB Memory Server
-  // By using mongoose.connect
   beforeAll(async () => {
     await mongoose.connect(
       process.env.MONGO_URL,
@@ -31,7 +29,7 @@ describe("Entry model", () => {
   it("should create & save entry successfully", async () => {
     const validEntry = new Entry(entryData);
     const savedEntry = await validEntry.save();
-    // Object Id should be defined when successfully saved to MongoDB.
+
     expect(savedEntry._id).toBeDefined();
     expect(savedEntry.title).toBe(entryData.title);
     expect(savedEntry.type).toBe(entryData.type);
